@@ -10,12 +10,12 @@ test("Able to login to Qbank with valid credentials", async ({ page }) => {
   let loginpagetest = new loginPage(page);
   let homepagetest = new homepage(page);
   const username = readExcelFile(
-    "C:\\Users\\bhole\\OneDrive\\Documents\\Desktop\\QBankGit_Repo\\QBankPlaywrite_Gobinda\\testdata\\QbankTestDataSheet.xlsx",
+    "..\\..\\testdata\\QbankTestDataSheet.xlsx",
     "Credentials",
   )[0].username;
   console.log(username);
   const password = readExcelFile(
-    "C:\\Users\\bhole\\OneDrive\\Documents\\Desktop\\QBankGit_Repo\\QBankPlaywrite_Gobinda\\testdata\\QbankTestDataSheet.xlsx",
+    "..\\..\\testdata\\QbankTestDataSheet.xlsx",
     "Credentials",
   )[0].password;
   console.log(password);
