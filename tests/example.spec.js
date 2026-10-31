@@ -1,19 +1,29 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { common } from "../utils/Commonutil";
+import { readExcelFile } from "../utils/exelutils";
+import { loginPage } from "../Pages/loginpage";
+import { homepage } from "../Pages/HomePage";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+test("Able to login to Qbank with valid credentials", async ({ page }) => {
+  let commonclstest = new common(page);
+  let loginpagetest = new loginPage(page);
+  let homepagetest = new homepage(page);
+  const username = readExcelFile(
+    "C:\\Users\\bhole\\OneDrive\\Documents\\Desktop\\QBankGit_Repo\\QBankPlaywrite_Gobinda\\testdata\\QbankTestDataSheet.xlsx",
+    "Credentials",
+  )[0].username;
+  console.log(username);
+  const password = readExcelFile(
+    "C:\\Users\\bhole\\OneDrive\\Documents\\Desktop\\QBankGit_Repo\\QBankPlaywrite_Gobinda\\testdata\\QbankTestDataSheet.xlsx",
+    "Credentials",
+  )[0].password;
+  console.log(password);
+  commonclstest.invoketheURL(page);
+  await page.waitForTimeout(5000);
+  loginpagetest.navigateToLoginPage(username, password);
+  await page.waitForTimeout(5000);
+  await expect(homepagetest.verifyhomepage()).toBeTruthy();
+  await page.waitForTimeout(5000);
+  console.log("Login to Qbank is successful with valid credentials");
 });
