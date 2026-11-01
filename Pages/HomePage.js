@@ -11,6 +11,7 @@ class homepage {
   }
 
   async verifyhomepage() {
+    var lblwelcomemsg = await this.lblwelcome.textContent();
     if (
       (await this.synchelelements.isVisible()) &&
       (await this.lblwelcome.isVisible()) &&
@@ -18,7 +19,8 @@ class homepage {
       (await this.btnLogout.isVisible()) &&
       (await this.lblTableTypeAcc.isVisible()) &&
       (await this.lblCurrentACC.isVisible()) &&
-      (await this.lblSavingAcc.isVisible())
+      (await this.lblSavingAcc.isVisible()) &&
+      lblwelcomemsg.includes("Welcome back!")
     ) {
       return true;
     } else return false;
