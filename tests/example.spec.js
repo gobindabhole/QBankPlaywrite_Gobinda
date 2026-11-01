@@ -7,7 +7,9 @@ import { homepage } from "../Pages/HomePage";
 const path = require("path");
 const filepath = path.join(__dirname, "../testdata/QbankTestDataSheet.xlsx");
 
-test("Able to login to Qbank with valid credentials", async ({ page }) => {
+test("TC-1 Login and Logout of QBank application with correct Username and Password.", async ({
+  page,
+}) => {
   let commonclstest = new common(page);
   let loginpagetest = new loginPage(page);
   let homepagetest = new homepage(page);
@@ -20,6 +22,9 @@ test("Able to login to Qbank with valid credentials", async ({ page }) => {
   loginpagetest.navigateToLoginPage(username, password);
   await page.waitForTimeout(5000);
   await expect(homepagetest.verifyhomepage()).toBeTruthy();
-  await page.waitForTimeout(5000);
-  console.log("Login to Qbank is successful with valid credentials");
+  await page.waitForTimeout(3000);
+  await homepagetest.performLogout();
+  await page.waitForTimeout(3000);
+  await expect(loginpagetest.verifyLoginPage()).toBeTruthy();
+  await page.waitForTimeout(3000);
 });

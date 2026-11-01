@@ -13,5 +13,14 @@ class loginPage {
     await this.btn_login.click();
     await this.page.waitForTimeout(2000);
   }
+  async verifyLoginPage() {
+    if (
+      (await this.txt_username.isVisible()) &&
+      (await this.txt_password.isVisible()) &&
+      (await this.btn_login.isVisible())
+    ) {
+      return true;
+    } else return false;
+  }
 }
 export { loginPage };
