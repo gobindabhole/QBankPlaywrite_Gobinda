@@ -9,6 +9,9 @@ class loginPage {
     this.lblinvalidcredential = this.page.getByText(
       "Invalid Username/Password",
     );
+    this.ink_navbarINLogin = this.page.locator(
+      "//*[contains(@class, 'qb-navbar-menuitem')]",
+    );
   }
   async navigateToLHomePage(username, password) {
     await this.txt_username.fill(username);
@@ -27,6 +30,8 @@ class loginPage {
       return true;
     } else return false;
   }
-  async;
+  async navigateToSpicifiedNavbar(navbarname) {
+    await this.ink_navbarINLogin.filter({ hasText: navbarname }).click();
+  }
 }
 export { loginPage };
